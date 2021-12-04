@@ -1,11 +1,11 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Songs
+    Music
 {% endblock %}
 
 {% block main %}
-    <h2>Songs</h2>
+    <h2>Music</h2>
     <table>
         <thead>
             <tr>
@@ -16,8 +16,8 @@
         <tbody>
             {% for song in songs %}
                 <tr>
-                    <td>{{ song.song_title }}</td>
-                    <td>{{ transaction.album_title }}</td>
+                    <td>{{ song["song_title"] }}</td>
+                    <td>{{ song["album_title"] }}</td>
                 </tr>
             {% endfor %}
         </tbody>

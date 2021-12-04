@@ -50,7 +50,7 @@ def search():
 
         # Validate form submission
         if not request.form.get("q"):
-            return apology("Not a theme")
+            return apology("Please submit a theme")
 
         # Query database for songs with given theme
         songs = db.execute("SELECT * FROM themes WHERE ? = 1", request.form.get("q"))
