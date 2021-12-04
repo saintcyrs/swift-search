@@ -1,5 +1,5 @@
 import os
-
+import sys
 from cs50 import SQL
 from flask import Flask, flash, redirect, render_template, request, session
 from flask_session import Session
@@ -53,7 +53,13 @@ def search():
             return apology("Please submit a theme")
 
         # Query database for songs with given theme
-        songs = db.execute("SELECT * FROM themes WHERE ? = 1", request.form.get("q"))
+        param = request.form.get("q")
+        songs = db.execute(f"SELECT * FROM themes WHERE {param}=1")
+        print(db, file=sys.stderr)
+        print(param, file=sys.stderr)
+        print(songs, file=sys.stderr)
+        print("test", file=sys.stderr)
+
 
         # Render table of songs
         return render_template("search.html", songs=songs)

@@ -16,8 +16,9 @@
         <tbody>
             {% for song in songs %}
                 <tr>
-                    <td>{{ song["song_title"] }}</td>
-                    <td>{{ song["album_title"] }}</td>
+                    <td>{{ song.song_title }}</td>
+                    <td>{{ song.album_title }}</td>
+                    <td>{{ song.features }}</td>
                 </tr>
             {% endfor %}
         </tbody>
