@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Music
+{% endblock %}
+
+{% block main %}
+    <h2>Music</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Song</th>
+                <th>Album</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for song in songs %}
+                <tr>
+                    <td>{{ song.song_title }}</td>
+                    <td>{{ song.album_title }}</td>
+                    <td>{{ song.features }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
