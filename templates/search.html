@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Songs
+{% endblock %}
+
+{% block main %}
+    <h2>Songs</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Song</th>
+                <th>Album</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for song in songs %}
+                <tr>
+                    <td>{{ song.song_title }}</td>
+                    <td>{{ transaction.album_title }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

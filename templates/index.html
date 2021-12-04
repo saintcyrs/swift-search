@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Search
+{% endblock %}
+
+{% block main %}
+<div>
+    <h2>Welcome to SwiftSearch.</h2>
+</div>
+<div class="search-engine">
+    <form action="/search" method="post">
+        <input autocomplete="off" autofocus name="q" placeholder="Query" type="search">
+        <button class="btn btn-primary" type="submit">Search</button>
+    </form>
+</div>
+{% endblock %}
