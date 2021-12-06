@@ -27,6 +27,10 @@ Session(app)
 # Configure CS50 Library to use SQLite database
 db = SQL("sqlite:///themes.db")
 
+#
+Columns = ["Traffic Lights", "Keeping Score", "Time", "Fate", "Times of Day", "Rain", "Car", "Alcohol", "Apologies", "Forever", "Calling", "Patching Things Up", "Clothing", "Comparisons", "Months", "Summer", "Dreams", "Intertwined", "Death", "Dancing", "Fire", "Memory", "Gold", "Red", "Blue", "Age", "Blood", "Screaming", "Cold", "Painting", "Lipstick", "Door", "Lots of Small Things", "City", "Twenty", "High School", "Magic", "Aging", "Heroes", "Other Families"]
+i = len(Columns)
+
 @app.after_request
 def after_request(response):
     """Ensure responses aren't cached"""
@@ -35,36 +39,47 @@ def after_request(response):
     response.headers["Pragma"] = "no-cache"
     return response
 
+columns = ["Traffic Lights", "Keeping Score", "Time", "Fate", "Times of Day", "Rain", "Car", "Alcohol", "Apologies", "Forever", "Calling", "Patching Things Up", "Clothing", "Comparisons", "Months", "Summer", "Dreams", "Intertwined", "Death", "Dancing", "Fire", "Memory", "Gold", "Red", "Blue", "Age", "Blood", "Screaming", "Cold", "Painting", "Lipstick", "Door", "Lots of Small Things", "City", "Twenty", "High School", "Magic", "Aging", "Heroes", "Other Families"]
 
 @app.route("/")
 def index():
     """Show autofill search option -- make autofill through javascript"""
     
     # Display the search feature on the homepage
-    return render_template("index.html")
-
-@app.route("/authorize")
-def authorize():
-    return render_template("authorize.html")
+    return render_template("index.html", len=len(columns), columns = columns)
 
 @app.route("/search", methods=["GET","POST"])
 def search():
     """Search through the database for songs """
+    
     if request.method == "POST":
 
-        # Validate form submission
-        if not request.form.get("q"):
-            return apology("Please submit a theme")
+        # Initializes a dict witha all values false
+        paramValues = dict.fromkeys(columns, False)
 
-        # Query database for songs with given theme
-        query = request.form.get("q")
-        songs = db.execute(f"SELECT * FROM themes WHERE {query}=1")
+        chosen = False
+
+        songs = []
+
+        for val in columns:
+            if request.form.get(val):
+            # The value is selected, lets get those mf songs
+                chosen = True
+                paramValues[val] = True
+                valName = val.lower().replace(" ","_")
+                songs.extend(db.execute(f"SELECT * FROM themes WHERE {valName}=1"))
+
+        if not chosen:
+            return apology("Select a damn category", 400)
+
+        print(paramValues, file=sys.stderr)
+        print(songs, file=sys.stderr)
 
         # Render table of songs
-        return render_template("search.html", query=query, songs=songs)
+        return render_template("search.html", songs=songs)
 
-    # Show search page    
-    return render_template("index.html")
+    # Show search page
+    return render_template("index.html", len=len(columns), columns=columns)
 
 """ @app.route("/history")
 @login_required
