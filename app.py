@@ -1,5 +1,6 @@
 import os
 import sys
+import requests
 from cs50 import SQL
 from flask import Flask, flash, redirect, render_template, request, session
 from flask_session import Session
@@ -42,6 +43,9 @@ def index():
     # Display the search feature on the homepage
     return render_template("index.html")
 
+@app.route("/authorize")
+def authorize():
+    return render_template("authorize.html")
 
 @app.route("/search", methods=["GET","POST"])
 def search():
@@ -53,16 +57,11 @@ def search():
             return apology("Please submit a theme")
 
         # Query database for songs with given theme
-        param = request.form.get("q")
-        songs = db.execute(f"SELECT * FROM themes WHERE {param}=1")
-        print(db, file=sys.stderr)
-        print(param, file=sys.stderr)
-        print(songs, file=sys.stderr)
-        print("test", file=sys.stderr)
-
+        query = request.form.get("q")
+        songs = db.execute(f"SELECT * FROM themes WHERE {query}=1")
 
         # Render table of songs
-        return render_template("search.html", songs=songs)
+        return render_template("search.html", query=query, songs=songs)
 
     # Show search page    
     return render_template("index.html")

@@ -1,11 +1,11 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Music
+    query
 {% endblock %}
 
 {% block main %}
-    <h2>Music</h2>
+    <h2>{{query}}</h2>
     <table>
         <thead>
             <tr>
@@ -18,7 +18,6 @@
                 <tr>
                     <td>{{ song.song_title }}</td>
                     <td>{{ song.album_title }}</td>
-                    <td>{{ song.features }}</td>
                 </tr>
             {% endfor %}
         </tbody>
