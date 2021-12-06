@@ -1,9 +1,40 @@
+body
+{
+    background-color: #cc254c;
+}
+
+
 /* Size for brand */
 nav .navbar-brand
 {
     font-size: xx-large;
 }
 
+.search-engine
+{
+    margin: auto;
+    width: 50%;
+    border: 3px solid white;
+    background-color: #cc254c;
+    padding: 10px;
+}
+
+h2{
+    margin: auto;
+    width: 50%;
+    border: 3px solid white;
+    background-color: white;
+    padding: 10px;
+}
+
+table 
+{
+    margin: auto;
+    width: 50%;
+    border: 3px solid white;
+    background-color:#cc254c;
+    padding: 10px;
+}
 /* Colors for brand */
 nav .navbar-brand .blue
 {
