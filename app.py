@@ -1,4 +1,4 @@
-from cs50 import SQL
+from cs50 import SQL, Flask
 from flask import Flask, redirect, render_template, request
 from flask_session import Session
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
@@ -49,7 +49,7 @@ def search():
 
         for val in columns:
             if request.form.get(val):
-            # The value is selected, get songs from themes
+            # If the theme is selected, get songs from themes
                 chosen = True
                 paramValues[val] = True
                 valName = val.lower().replace(" ","_")
