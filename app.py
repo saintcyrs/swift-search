@@ -3,16 +3,11 @@ from flask import Flask, redirect, render_template, request
 from flask_session import Session
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
 
-from helpers import usd
-
 # Configure application
 app = Flask(__name__)
 
 # Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
-
-# Custom filter
-app.jinja_env.filters["usd"] = usd
 
 # Configure session to use filesystem (instead of signed cookies)
 app.config["SESSION_PERMANENT"] = False
@@ -24,7 +19,6 @@ db = SQL("sqlite:///themes.db")
 
 #  Initialize global variable to name of each of the columns in TS database
 columns = ["Traffic Lights", "Keeping Score", "Time", "Fate", "Times of Day", "Rain", "Car", "Alcohol", "Apologies", "Forever", "Calling", "Patching Things Up", "Clothing", "Comparisons", "Months", "Summer", "Dreams", "Intertwined", "Death", "Dancing", "Fire", "Memory", "Gold", "Red", "Blue", "Age", "Blood", "Screaming", "Cold", "Painting", "Lipstick", "Door", "Lots of Small Things", "City", "Twenty", "High School", "Magic", "Aging", "Heroes", "Other Families"]
-i = len(columns)
 
 @app.after_request
 def after_request(response):
